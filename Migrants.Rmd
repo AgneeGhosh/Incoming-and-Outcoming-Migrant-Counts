@@ -1,0 +1,63 @@
+---
+title: "Migrants and Religion"
+author: "Agnee Ghosh"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+# Load necessary libraries
+library(readxl)
+library(dplyr)
+library(ggplot2)
+
+# Load the data (replace the file path with the correct one)
+data <- read_excel("/Users/agneeghosh/Documents/GitHub/Incoming-and-Outcoming-Migrant-Counts/Incoming and Outgoing Migrant Counts.xlsx", sheet = "FOTM2")
+
+# Inspect the data to find relevant columns
+head(data)
+
+colnames(data)
+
+# Rename columns for simplicity
+colnames(data) <- c("Direction", "Year", "Country", "Religion", "Count", "Percent", "Region", "Level", "CountryCode")
+
+# Now filter and select
+filtered_data <- data %>%
+  filter(Religion != "All") %>%
+  select(Religion, Count)
+
+# Convert Count to numeric (it might be in character format initially)
+filtered_data$Count <- as.numeric(filtered_data$Count)
+
+# Summarize the data by religion
+religion_summary <- filtered_data %>%
+  group_by(Religion) %>%
+  summarise(Total_Count = sum(Count, na.rm = TRUE))
+
+# Calculate percentage distribution
+religion_summary <- religion_summary %>%
+  mutate(Percentage = Total_Count / sum(Total_Count) * 100)
+
+# Define a pastel color palette
+pastel_colors <- c("#FBB4AE", "#B3CDE3", "#CCEBC5", "#DECBE4", "#FED9A6", "#FFFFCC", "#E5D8BD", "#FDDAEC")
+
+# Visualize the data with a bar plot using pastel colors
+ggplot(religion_summary, aes(x = Religion, y = Percentage, fill = Religion)) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(values = pastel_colors) +  # Apply pastel colors
+  labs(title = "Religious Group Distribution Among Migrants",
+       x = "Religion",
+       y = "Percentage") +
+  theme_minimal()
+
+ggplot(religion_summary, aes(x = "", y = Percentage, fill = Religion)) +
+  geom_bar(width = 1, stat = "identity") +
+  coord_polar("y") +
+  scale_fill_manual(values = pastel_colors) +  # Apply pastel colors
+  labs(title = "Religious Group Distribution Among Migrants") +
+  theme_void()
