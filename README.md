@@ -35,6 +35,7 @@ To explore the economic impact, a subset of the dataset containing economic indi
 
 ### 4. Results and Insights
 The separate analyses provided several key insights:
+
 **Trends Over Time:** Migration peaks corresponded with specific global events and policy changes.
 
 **Demographic Trends:** Younger individuals and males were more likely to migrate, with significant variation based on the region of origin.
