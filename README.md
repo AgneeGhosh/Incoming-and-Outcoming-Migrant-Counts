@@ -35,9 +35,13 @@ To explore the economic impact, a subset of the dataset containing economic indi
 
 ### 4. Results and Insights
 The separate analyses provided several key insights:
+
 **Trends Over Time:** Migration peaks corresponded with specific global events and policy changes.
+
 **Demographic Trends:** Younger individuals and males were more likely to migrate, with significant variation based on the region of origin.
+
 **Countries of Origin:** The top contributing countries were from regions facing conflict or economic hardship.
+
 **Economic Correlations:** Migration was often correlated with regions experiencing economic growth, showing how migration may be linked to job availability and better economic opportunities.
 
 This analysis provided a comprehensive view of migration patterns through separate focused analyses on time trends, demographics, countries of origin, and economic impact. Each step was clearly structured, utilizing R for efficient data processing and visualization.
